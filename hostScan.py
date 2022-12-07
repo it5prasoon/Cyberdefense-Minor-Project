@@ -1,8 +1,7 @@
-from audioop import add
+from asyncore import read
 import os, platform
 from datetime import datetime as dt
 
-from sympy import ln
 
 # net = input("enter network address: ")
 
@@ -15,7 +14,7 @@ oSystem = platform.system()
 
 
 def back(file_name):
-    filw = open(file_name, 'w')
+    filw = open(file_name, 'a')
     filw.write("ping sweep result for network"+net2+"*")
     oper = platform.system()
     if oper == "Windows":
@@ -28,17 +27,16 @@ def back(file_name):
         com = pinc + addr
         res = os.popen(com)
         for line in res.readlines():
-            if(line.count("TTL")):
-                break;
-            if(line.count("TTL")):
-                filw.write(addr+" ---> live")
+            if(line.split("ttl").__len__() == 2):
+                filw.write("\n"+addr+" ---> live")
 
 
 def fun():
     net = input("Enter network address: ")
-    net1 = net.split('.')
+    net_1 = net.split(' ')
+    net1 = net_1[0].split('.')
     global net2
-    net2 = net1[0] + '.' + net1[1] + '.' + net[2] + '.'
+    net2 = str(net1[0]) + '.' + str(net1[1]) + '.' + str(net1[2]) + '.'
     st = int(input("Enter first number for last octet: "))
     en = int(input("Enter last number for last octet: "))
     en +=1
