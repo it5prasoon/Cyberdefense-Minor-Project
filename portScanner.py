@@ -5,18 +5,21 @@ from datetime import datetime as dt
 operation = "port scanning"
 ip = ""
 op_ports = []
-ports = range(1, 65536)
+ports = range(1, 100)
 
-def probe(ip, port, result = 1):
+def probe(ip, port):
+    result = 1
     try:
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        sock.setdefaulttimeout(10)
+        socket.setdefaulttimeout(10)
         r = sock.connect_ex((ip, port))
         if (r==0):
             result = r
         sock.close()
     except Exception as e:
         pass
+
+    return result
 
 
 def back(file_name):
@@ -32,7 +35,7 @@ def back(file_name):
     if op_ports:
         filw.write("Open ports:\n")
         for port in sorted(op_ports):
-            filw(str(port)+"\n")
+            filw.write(str(port)+"\n")
     else:
         filw.write("No ports are open.")
 

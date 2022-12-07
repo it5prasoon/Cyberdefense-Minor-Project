@@ -1,3 +1,0 @@
-Port scan summary for host: 192.168.252.124
-========================================
-No ports are open.
