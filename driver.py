@@ -46,7 +46,7 @@ def choice(op1):
 while true:
     try:
         print(opers)
-        op1 = int(input("Enter option to proceed...:"))
+        op1 = int(input("Enter option to proceed...: "))
         choice(op1)
     except KeyboardInterrupt:
         print("\nGood Bye")
