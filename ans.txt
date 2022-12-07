@@ -1,0 +1,10 @@
+robots
+sample
+script
+style
+board
+abc
+vfsd
+qwerfg
+favicon.ico
+

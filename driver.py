@@ -1,7 +1,8 @@
+#!/usr/bin/python3
 import pyfiglet
 from responses import target
 from sqlalchemy import true
-import hashIder, hostScan, portScanner, dummy, fuzzer, exitor
+import hostScan, portScanner, dummy, fuzzer, exitor
 from threading import *
 
 banner = pyfiglet.figlet_format("Python Automation Scripts")
@@ -11,9 +12,8 @@ opers = """
 [0] List running processes
 [1] Scan for live hosts on a network
 [2] Scan for open ports on a target host
-[3] Identify hash type
-[4] Fuzz for directories/subdomains
-[5] To exit
+[3] Fuzz for directories/subdomains
+[4] To exit
 """
 
 works = []
@@ -23,9 +23,8 @@ def choice(op1):
         0: dummy,
         1: hostScan,
         2: portScanner,
-        3: hashIder,
-        4: fuzzer,
-        5: exitor
+        3: fuzzer,
+        4: exitor
     }
 
     pkg = switcher.get(op1, None)

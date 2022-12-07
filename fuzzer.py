@@ -3,13 +3,13 @@ import urllib.parse, urllib.request, urllib.error
 import queue
 from datetime import datetime as dt
 
-target_url = "http://10.10.186.101"
-word_file = "ans.txt"
+target_url = ""
+word_file = "sample_list.txt"
 resume = None
 user_agent = "Mozilla/5.0 (X11; Linux x86_64; rv:19.0) Gecko/20100101 Firefox/19.0"
-operation="Web directory fuzzing"
+operation=""
 
-ext = [".php", ".bak", ".txt", ".inc", ".js"]
+ext = [".php", ".txt", ".bak", ".js", ".html"]
 
 def list_build(word_file):
 	fd = open(word_file, "r")
@@ -51,7 +51,6 @@ def bruter(wrd_queue, file_name, extensions=None):
 
 		for brute in attempt_list:
 			url = "%s%s" % (target_url, urllib.parse.quote(brute))
-			print("url", url)
 
 			try:
 				headers = {}
@@ -75,9 +74,10 @@ def back(file_name):
 
 
 def fun():
-	print("Enter the target url with FUZZ in the position of what you want to fuzz")
+	print("Enter the target url to fuzz:")
 	global target_url
 	target_url = input()
+	global word_file
 	print("Currently using dictionary at:",word_file)
 	ch = print("Change dictionary? (y/N): ")
 	if(ch=="y" or ch =="Y"):
@@ -86,8 +86,7 @@ def fun():
 	name = dt.isoformat(dt.now())
 	file_name = "outputs/DirFuzz/"+name+".txt"
 	print("[!] Results will be written to file:",file_name)
+	global operation
+	operation = "directory fuzzing for host "+target_url
 	return file_name
 
-
-
-back("sample")

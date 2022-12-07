@@ -1,4 +1,4 @@
-import sys, socket, pyfiglet
+import sys, socket
 from datetime import datetime as dt
 
 # print(ascii_banner)
@@ -10,8 +10,8 @@ ports = range(1, 65536)
 def probe(ip, port, result = 1):
     try:
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        sock.settimeout(1)
-        r = sock.connect((ip, port))
+        sock.setdefaulttimeout(10)
+        r = sock.connect_ex((ip, port))
         if (r==0):
             result = r
         sock.close()
