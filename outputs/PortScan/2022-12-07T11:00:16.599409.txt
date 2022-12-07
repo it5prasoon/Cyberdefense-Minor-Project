@@ -2,3 +2,4 @@ Port scan summary for host: 127.0.0.1
 ========================================
 Open ports:
 80
+3306

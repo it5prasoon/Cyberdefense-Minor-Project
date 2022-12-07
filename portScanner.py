@@ -5,7 +5,7 @@ from datetime import datetime as dt
 operation = "port scanning"
 ip = ""
 op_ports = []
-ports = range(1, 100)
+ports = range(1, 65535)
 
 def probe(ip, port):
     result = 1
