@@ -1,28 +1,30 @@
-import sys, socket
+import socket
 from datetime import datetime as dt
 
 # print(ascii_banner)
 operation = "port scanning"
 ip = ""
 op_ports = []
-ports = range(1, 65535)
+ports = range(1, 65536)
+file_name = ""
 
 def probe(ip, port):
-    result = 1
+    result =1
     try:
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        socket.setdefaulttimeout(10)
+        socket.setdefaulttimeout(5)
         r = sock.connect_ex((ip, port))
         if (r==0):
-            result = r
+            # print("port open",port)
+            result = 0
         sock.close()
     except Exception as e:
         pass
-
+    # print("result", result)
     return result
 
 
-def back(file_name):
+def back():
     filw = open(file_name, 'w')
     filw.write("Port scan summary for host: "+ip+"\n")
     filw.write("========================================\n")
@@ -43,6 +45,6 @@ def fun():
     global ip
     ip = input("Enter IP address: ")
     name = dt.isoformat(dt.now())
+    global file_name
     file_name = "outputs/PortScan/"+name+".txt"
     print("Results will be written to file: ",file_name)
-    return file_name

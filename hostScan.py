@@ -1,7 +1,7 @@
-from asyncore import read
 import os, platform
 from datetime import datetime as dt
 
+from sympy import ln
 
 # net = input("enter network address: ")
 
@@ -11,10 +11,10 @@ net1 = []
 net2 = ""
 rng = []
 oSystem = platform.system()
+file_name = ""
 
-
-def back(file_name):
-    filw = open(file_name, 'a')
+def back():
+    filw = open(file_name, 'w')
     filw.write("ping sweep result for network"+net2+"*")
     oper = platform.system()
     if oper == "Windows":
@@ -29,6 +29,8 @@ def back(file_name):
         for line in res.readlines():
             if(line.split("ttl").__len__() == 2):
                 filw.write("\n"+addr+" ---> live")
+            if(line.split("TTL").__len__() == 2):
+                filw.write("\n"+addr+" ---> live")
 
 
 def fun():
@@ -42,6 +44,6 @@ def fun():
     en +=1
     rng.append(st); rng.append(en)
     name = dt.isoformat(dt.now())
+    global file_name
     file_name = "outputs/HostPing/"+name+".txt"
     print("Results will be written to file: ",file_name)
-    return file_name

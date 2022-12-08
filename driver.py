@@ -35,9 +35,10 @@ def choice(op1):
     elif pkg==exitor:
         exitor.env_exit(works)
     else:
-        file_name = pkg.fun()
-        td = Thread(target=pkg.back(file_name), name = pkg.operation)
-        td.start(); td.join()
+        pkg.fun()
+        td = Thread(target=pkg.back, name = pkg.operation, daemon=True)
+        td.daemon = True
+        td.start()
         works.append(td)
 
 
@@ -46,7 +47,7 @@ def choice(op1):
 while true:
     try:
         print(opers)
-        op1 = int(input("Enter option to proceed...: "))
+        op1 = int(input("Enter option to proceed...:"))
         choice(op1)
     except KeyboardInterrupt:
         print("\nGood Bye")

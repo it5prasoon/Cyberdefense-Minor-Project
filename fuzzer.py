@@ -11,7 +11,10 @@ operation=""
 
 ext = [".php", ".txt", ".bak", ".js", ".html"]
 
-def list_build(word_file):
+wrd_queue = queue.Queue()
+file_name = ""
+
+def list_build():
 	fd = open(word_file, "r")
 	raw_words = fd.readlines()
 	fd.close()
@@ -33,7 +36,7 @@ def list_build(word_file):
 
 	return words
 
-def bruter(wrd_queue, file_name, extensions=None):
+def back(extensions=None):
 	fd = open(file_name, "w")
 
 	while not wrd_queue.empty():
@@ -43,7 +46,6 @@ def bruter(wrd_queue, file_name, extensions=None):
 			attempt_list.append("/{}/".format(attempt))
 		else:
 			attempt_list.append("/{}".format(attempt))
-		#attempt_list.append("/%s/" % attempt)
 
 		if extensions:
 			for extension in extensions:
@@ -68,25 +70,23 @@ def bruter(wrd_queue, file_name, extensions=None):
 
 		
 
-def back(file_name):
-	wrd_queue = list_build(word_file)
-	bruter(wrd_queue, file_name)
-
 
 def fun():
+	global wrd_queue
+	wrd_queue = list_build()
 	print("Enter the target url to fuzz:")
 	global target_url
 	target_url = input()
 	global word_file
 	print("Currently using dictionary at:",word_file)
-	ch = print("Change dictionary? (y/N): ")
+	ch = input("Change dictionary? (y/N): ")
 	if(ch=="y" or ch =="Y"):
 		word_file = input("Enter path to dictionary: ")
 	
 	name = dt.isoformat(dt.now())
+	global file_name
 	file_name = "outputs/DirFuzz/"+name+".txt"
-	print("[!] Results will be written to file:",file_name)
+	print("[!] Results will be written to file:\n",file_name)
 	global operation
 	operation = "directory fuzzing for host "+target_url
-	return file_name
 

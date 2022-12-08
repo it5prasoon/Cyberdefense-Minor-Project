@@ -1,1 +1,1 @@
-# Cyberdefense-Minor-Project
+# Python automation scripts to carry out reconnaissance tasks
